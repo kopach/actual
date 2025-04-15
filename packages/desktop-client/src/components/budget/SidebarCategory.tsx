@@ -22,7 +22,7 @@ import {
   type ScheduleEntity,
 } from 'loot-core/types/models';
 
-import { useCategorySchedule } from '../../hooks/useCategorySchedule';
+import { useCategoryScheduleGoalTemplate } from '../../hooks/useCategoryScheduleGoalTemplate';
 import { useContextMenu } from '../../hooks/useContextMenu';
 import { useFeatureFlag } from '../../hooks/useFeatureFlag';
 import { useLocale } from '../../hooks/useLocale';
@@ -74,7 +74,7 @@ export function SidebarCategory({
   const triggerRef = useRef(null);
   const navigate = useNavigate();
 
-  const { schedule, status: scheduleStatus } = useCategorySchedule({
+  const { schedule, status: scheduleStatus } = useCategoryScheduleGoalTemplate({
     category,
   });
   const isScheduleUpcomingOrMissed =
