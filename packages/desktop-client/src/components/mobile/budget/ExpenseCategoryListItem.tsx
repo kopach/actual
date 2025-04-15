@@ -7,6 +7,10 @@ import {
   SvgArrowThickRight,
   SvgCheveronRight,
 } from '@actual-app/components/icons/v1';
+import {
+  SvgArrowsSynchronize,
+  SvgCalendar3,
+} from '@actual-app/components/icons/v2';
 import { styles, type CSSProperties } from '@actual-app/components/styles';
 import { Text } from '@actual-app/components/text';
 import { theme } from '@actual-app/components/theme';
@@ -20,6 +24,7 @@ import { groupById, integerToCurrency } from 'loot-core/shared/util';
 import { type CategoryEntity } from 'loot-core/types/models';
 
 import { useCategories } from '../../../hooks/useCategories';
+import { useCategorySchedule } from '../../../hooks/useCategorySchedule';
 import { useFeatureFlag } from '../../../hooks/useFeatureFlag';
 import { useNavigate } from '../../../hooks/useNavigate';
 import { useSyncedPref } from '../../../hooks/useSyncedPref';
@@ -50,6 +55,17 @@ function ExpenseCategoryName({
     show3Columns,
     isSidebar: true,
   });
+  const { schedule, status: scheduleStatus } = useCategorySchedule({
+    category,
+  });
+  const isScheduleUpcomingOrMissed =
+    scheduleStatus === 'upcoming' ||
+    scheduleStatus === 'due' ||
+    scheduleStatus === 'missed';
+
+  const isScheduleRecurring =
+    schedule && schedule._date && !!schedule._date.frequency;
+
   return (
     <View
       style={{
@@ -94,6 +110,25 @@ function ExpenseCategoryName({
           >
             {category.name}
           </Text>
+          {isScheduleUpcomingOrMissed && (
+            <View
+              style={{
+                flexShrink: 0,
+                color:
+                  scheduleStatus === 'missed'
+                    ? theme.errorBackground
+                    : scheduleStatus === 'due'
+                      ? theme.warningBackground
+                      : theme.upcomingBackground,
+              }}
+            >
+              {isScheduleRecurring ? (
+                <SvgArrowsSynchronize style={{ width: 14, height: 14 }} />
+              ) : (
+                <SvgCalendar3 style={{ width: 14, height: 14 }} />
+              )}
+            </View>
+          )}
           <SvgCheveronRight
             style={{ flexShrink: 0, color: theme.tableTextSubdued }}
             width={14}
