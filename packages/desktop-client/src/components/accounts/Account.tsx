@@ -29,7 +29,6 @@ import {
   pagedQuery,
   type PagedQuery,
 } from 'loot-core/client/query-helpers';
-import { type AppDispatch } from 'loot-core/client/store';
 import { send, listen } from 'loot-core/platform/client/fetch';
 import * as undo from 'loot-core/platform/client/undo';
 import { type UndoState } from 'loot-core/server/undo';
@@ -86,7 +85,7 @@ import {
   updateAccount,
   updateNewTransactions,
 } from '../../queries/queriesSlice';
-import { useSelector, useDispatch } from '../../redux';
+import { type AppDispatch, useSelector, useDispatch } from '../../redux';
 import { type SavedFilter } from '../filters/SavedFilterMenuButton';
 import { TransactionList } from '../transactions/TransactionList';
 import { validateAccountName } from '../util/accountValidation';
