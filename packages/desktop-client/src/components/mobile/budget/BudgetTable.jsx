@@ -53,16 +53,15 @@ import { PullToRefresh } from '../PullToRefresh';
 import { ExpenseGroupList } from './ExpenseGroupList';
 import { IncomeGroup } from './IncomeGroup';
 
-export const ROW_HEIGHT = 50;
-
 import { useCategories } from '@hooks/useCategories';
-import { useFeatureFlag } from '@hooks/useFeatureFlag';
 import { useLocale } from '@hooks/useLocale';
 import { useLocalPref } from '@hooks/useLocalPref';
 import { useNavigate } from '@hooks/useNavigate';
 import { usePrevious } from '@hooks/usePrevious';
 import { useSyncedPref } from '@hooks/useSyncedPref';
 import { useUndo } from '@hooks/useUndo';
+
+export const ROW_HEIGHT = 50;
 
 export const PILL_STYLE = {
   borderRadius: 16,
